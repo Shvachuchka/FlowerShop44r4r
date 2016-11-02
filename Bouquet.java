@@ -71,17 +71,20 @@ public class Bouquet {
 
     public void findColor() throws IOException {
 
-        String findColor = reader.readLine();
         List<Flower> flowerList = new ArrayList<>();
         for (Bouquet bouquet: bouquetList){
-            if (findColor.equals(findColor)){
-              flowerList = bouquet.getFlowerList();
-            }
+                         flowerList = bouquet.getFlowerList();
         }
         System.out.println("Вибрати колір квітки");
         String colorFlower = reader.readLine();
-        flowerList.stream().filter(Flower -> Flower.getColor().equals(colorFlower)).forEach(System.out::println);
-
+        for (Flower flower : flowerList){
+            if (flower.getColor().equals(colorFlower)){
+                System.out.println(flower);
+            }else {
+                System.out.println("Такого кольору немає в букеті");
+                break;
+            }
+        }
 
     }
 
@@ -89,33 +92,41 @@ public class Bouquet {
 //шукаємо за назвою квітки
 
     public void findNameFlower() throws IOException {
-       String findName = reader.readLine();
         List<Flower> flowerList = new ArrayList<>();
         for (Bouquet bouquet : bouquetList) {
-            if (findName.equals(findName)) {
-             flowerList = bouquet.getFlowerList();
-           }
-        }
+                flowerList = bouquet.getFlowerList();
+            }
 
         System.out.println("Введіть назву квітки");
         String nameFlower = reader.readLine();
-        flowerList.stream().filter(Flower -> Flower.getName().equals(nameFlower)).forEach(System.out::println);
-
+        for (Flower flower : flowerList){
+            if(flower.getName().equals(nameFlower)){
+                System.out.println(flower);
+            } else {
+                System.out.println("Такої квітки немає в букеті");
+                break;
+            }
+        }
     }
 
 //шукаємо за висотою квітки
 public void findHeightFlower() throws IOException {
-    String findHeight = reader.readLine();
     List<Flower> flowerList = new ArrayList<>();
     for (Bouquet bouquet : bouquetList) {
-        if (findHeight.equals(findHeight)) {
-            flowerList = bouquet.getFlowerList();
-        }
+        flowerList = bouquet.getFlowerList();
     }
 
-    System.out.println("Виберіть висоту квітки");
+    System.out.println("Введіть висоту квітки");
     String heightFlower = reader.readLine();
-    flowerList.stream().filter(Flower -> Flower.getName().equals(heightFlower)).forEach(System.out::println);
+    int a = Integer.parseInt(heightFlower);
+    for (Flower flower : flowerList){
+        if (flower.getHeight()==a) {
+            System.out.println(flower);
+        } else{
+            System.out.println("Такої квітки немає в букеті");
+            break;
+        }
 
-}
+        }
+    }
 }
