@@ -1,14 +1,11 @@
 package Flower;
 
-import java.awt.font.ShapeGraphicAttribute;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-/**
- * Created by Sasha on 01.11.2016.
- */
+
 public class Bouquet {
 
     private List<Flower> flowerList;
@@ -39,10 +36,9 @@ public class Bouquet {
 
     private List<Bouquet> bouquetList = new ArrayList<>();
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    Random random = new Random();
 
-// Створюєм рандомно букет
 
+// Create a bouquet
 
     public void makeBouquet() throws IOException {
 
@@ -50,46 +46,70 @@ public class Bouquet {
         System.out.println("Введіть кількісь квітів в букеті");
         String fl = reader.readLine();
         int number = Integer.parseInt(fl);
-        String name[] = {"Rose", "Tulip", "Chamomile", "Lily", "Narcissus", "Gladiolus"};
-        String color[] = {"red", "pink", "yellow", "white",};
-        int height[] = {20, 25, 30, 35, 40};
-        Date date = Calendar.getInstance().getTime();
+
+        flowerList.add(new Flower("Rose", "red",30,30, FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Tulip", "yellow",20,15,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Chamomile", "white",35,20,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Chamomile", "white",35,20,FreshFlower.DEAD));
+        flowerList.add(new Flower("Lily","pink",30,25,FreshFlower.NOT_FRESH_FLOWER));
+        flowerList.add(new Flower("Narcissus","white",20,20,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Rose", "red",30,30,FreshFlower.DEAD));
+        flowerList.add(new Flower("Rose", "white",30,30,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Lily", "pink",30,25,FreshFlower.NOT_FRESH_FLOWER));
+        flowerList.add(new Flower("Narcissus","white",20,20 ,FreshFlower.DEAD));
+        flowerList.add(new Flower("Lily","pink",30,25,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Tulip","yellow",20,15,FreshFlower.FRESH_FLOWER));
+        flowerList.add(new Flower("Rose","red",30,30,FreshFlower.NOT_FRESH_FLOWER));
 
         for (int i = 1; i <= number; i++) {
-            flowerList.add(new Flower(name[random.nextInt(name.length)], color[random.nextInt(color.length)], height[random.nextInt(height.length)]));
+            flowerList.add(new Flower());
         }
         bouquetList.add(new Bouquet(flowerList));
     }
 
-//Виводить всі букети
+//Print all Bouquet
 
     public void printBouquet() {
         bouquetList.forEach(System.out::println);
     }
 
- //Шукаємо за кольором квітки
+ //Print white Chamomile
 
-    public void findColor() throws IOException {
+    public void white_Chamomile() throws IOException {
 
         List<Flower> flowerList = new ArrayList<>();
+
         for (Bouquet bouquet: bouquetList){
                          flowerList = bouquet.getFlowerList();
         }
-        System.out.println("Вибрати колір квітки");
-        String colorFlower = reader.readLine();
+        System.out.println("Виводимо білі ромашки ");
         for (Flower flower : flowerList){
-            if (flower.getColor().equals(colorFlower)){
-                System.out.println(flower);
-            }else {
-                System.out.println("Такого кольору немає в букеті");
-                break;
-            }
-        }
-
+           if (flower.getColorFlower()=="white" &&flower.getNameFlower() == "Chamomile" )
+            {
+             System.out.println(flower);
+           }
+         }
     }
 
+    //Print any options
 
-//шукаємо за назвою квітки
+    public void any_options() throws IOException {
+
+        List<Flower> flowerList = new ArrayList<>();
+        for (Bouquet bouquet: bouquetList){
+            flowerList = bouquet.getFlowerList();
+        }
+        System.out.println("Виводимо параметри квітки ");
+        String param = reader.readLine();
+        String price = reader.readLine();
+        int pr = Integer.parseInt(price);
+       for (Flower flower : flowerList){
+            flowerList.stream().filter(Flower -> Flower.getFresh_Flower().equals(param)&&Flower.getNameFlower().equals(param) ||
+            Flower.getColorFlower().equals(param)|| Flower.getHeightFlower() == flower.getHeightFlower()).forEach(System.out::println);
+        }
+     }
+
+//Find Name Flower
 
     public void findNameFlower() throws IOException {
         List<Flower> flowerList = new ArrayList<>();
@@ -100,7 +120,7 @@ public class Bouquet {
         System.out.println("Введіть назву квітки");
         String nameFlower = reader.readLine();
         for (Flower flower : flowerList){
-            if(flower.getName().equals(nameFlower)){
+            if(flower.getNameFlower().equals(nameFlower)){
                 System.out.println(flower);
             } else {
                 System.out.println("Такої квітки немає в букеті");
@@ -109,7 +129,7 @@ public class Bouquet {
         }
     }
 
-//шукаємо за висотою квітки
+//Find Height Flower
 public void findHeightFlower() throws IOException {
     List<Flower> flowerList = new ArrayList<>();
     for (Bouquet bouquet : bouquetList) {
@@ -120,7 +140,7 @@ public void findHeightFlower() throws IOException {
     String heightFlower = reader.readLine();
     int a = Integer.parseInt(heightFlower);
     for (Flower flower : flowerList){
-        if (flower.getHeight()==a) {
+        if (flower.getHeightFlower()==a) {
             System.out.println(flower);
         } else{
             System.out.println("Такої квітки немає в букеті");
