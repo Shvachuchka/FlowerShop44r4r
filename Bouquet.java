@@ -62,7 +62,10 @@ public class Bouquet {
         flowerList.add(new Flower("Rose","red",30,30,FreshFlower.NOT_FRESH_FLOWER));
 
         for (int i = 1; i <= number; i++) {
-            flowerList.add(new Flower());
+        //  if (flowerList.stream().filter(Flower -> FreshFlower.FRESH_FLOWER.equals(number));
+        //    {
+
+        //    }
         }
         bouquetList.add(new Bouquet(flowerList));
     }
